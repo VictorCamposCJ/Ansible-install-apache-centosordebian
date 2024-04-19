@@ -1,0 +1,14 @@
+---
+- hosts: all
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: Incluir rol para CentOS
+      include_role:
+        name: ins-apache-selinux
+      when: ansible_os_family == "RedHat"
+
+    - name: Incluir rol para Debian
+      include_role:
+        name: debian-ins-apache-selinux
+      when: ansible_os_family == "Debian"
